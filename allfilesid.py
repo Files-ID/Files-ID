@@ -1,6 +1,7 @@
 import telebot
+import os
 
-TOKEN = "7900346127:AAH0u02C1Q8grdXxNIyMn2sYcvL630itCLU"  # ضع التوكن الخاص بالبوت هنا
+TOKEN = os.getenv("BOT_TOKEN")
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(content_types=['document'])
