@@ -12,9 +12,17 @@ if not TOKEN:
 
 bot = telebot.TeleBot(TOKEN)
 
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    bot.send_message(message.chat.id, "مرحبًا! قم برفع الملف الذي ترغب في الحصول على file_id الخاص به.")
+
+# التعامل مع الملفات المرفوعة من قبل المستخدم
 @bot.message_handler(content_types=['document'])
-def get_file_id(message):
+def handle_uploaded_file(message):
+    # استخراج file_id من الملف المرسل
     file_id = message.document.file_id
-    bot.reply_to(message, f"File ID: `{file_id}`", parse_mode="Markdown")
+    
+    # إرسال file_id للمستخدم بعد رفع الملف
+    bot.reply_to(message, f"تم رفع الملف بنجاح! File ID: `{file_id}`", parse_mode="Markdown")
 
 bot.polling(none_stop=True)
